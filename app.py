@@ -7,10 +7,11 @@ import uuid
 app = Flask(__name__)
 app.secret_key = 'tiburones'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'cineplus1'
+app.config['MYSQL_HOST'] = 'sql5.freesqldatabase.com'
+app.config['MYSQL_USER'] = 'sql5833321'
+app.config['MYSQL_PASSWORD'] = 'ICkMjZYVr1'
+app.config['MYSQL_DB'] = 'sql5833321'
+app.config['MYSQL_PORT'] = 3306
 
 mysql = MySQL(app)
 
