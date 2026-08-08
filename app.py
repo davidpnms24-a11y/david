@@ -461,6 +461,69 @@ def ActualizarPelicula():
 
     return redirect('/peliculas')
 
+@app.route('/catalogo')
+def catalogo():
+
+    busqueda = request.args.get('busqueda', '')
+
+    cursor = mysql.connection.cursor()
+
+    if busqueda:
+
+        cursor.execute(
+            """
+            SELECT idPelicula, cTitulo, cGenero
+            FROM pelicula
+            WHERE cTitulo LIKE %s
+            """,
+            ('%' + busqueda + '%',)
+        )
+
+    else:
+
+        cursor.execute(
+            """
+            SELECT idPelicula, cTitulo, cGenero
+            FROM pelicula
+            """
+        )
+
+    peliculas = cursor.fetchall()
+
+    cursor.close()
+
+    return render_template(
+        'catalogo.html',
+        peliculas=peliculas,
+        busqueda=busqueda
+    )
+
+@app.route('/detalle_pelicula/<int:id>')
+def detalle_pelicula(id):
+
+    cursor = mysql.connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT idPelicula, cTitulo, cGenero
+        FROM pelicula
+        WHERE idPelicula=%s
+        """,
+        (id,)
+    )
+
+    pelicula = cursor.fetchone()
+
+    cursor.close()
+
+    if pelicula is None:
+        return "Película no encontrada", 404
+
+    return render_template(
+        'DetallePelicula.html',
+        pelicula=pelicula
+    )
+
 @app.route('/ActualizarConfiguracion', methods=['POST'])
 def ActualizarConfiguracion():
 

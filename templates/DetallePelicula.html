@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ pelicula[1] }} | CinePlus</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(229, 9, 20, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0b0b0d,
+                    #151518,
+                    #09090a
+                );
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+
+        /* ENCABEZADO */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 25px 45px;
+
+            border-bottom: 1px solid #25252a;
+
+        }
+
+        .logo {
+
+            color: #e50914;
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+        }
+
+        .back-top {
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+
+        }
+
+        .back-top:hover {
+
+            color: white;
+
+        }
+
+
+        /* CONTENIDO */
+
+        .pelicula-container {
+
+            max-width: 1000px;
+
+            min-height: calc(100vh - 90px);
+
+            margin: auto;
+
+            padding: 70px 25px;
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+
+        .pelicula-panel {
+
+            width: 100%;
+
+            background: rgba(20, 20, 23, 0.92);
+
+            border: 1px solid #29292f;
+
+            border-radius: 18px;
+
+            padding: 65px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        /* ETIQUETA */
+
+        .pelicula-label {
+
+            color: #e50914;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        /* TITULO */
+
+        .pelicula-titulo {
+
+            font-size: 52px;
+
+            font-weight: 700;
+
+            margin: 0 0 12px;
+
+        }
+
+
+        /* GENERO */
+
+        .pelicula-genero {
+
+            color: #bbb;
+
+            font-size: 16px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .pelicula-genero::before {
+
+            content: "";
+
+        }
+
+
+        /* DESCRIPCION */
+
+        .pelicula-descripcion {
+
+            max-width: 650px;
+
+            color: #999;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        /* INFORMACION */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .info-item {
+
+            background: #18181b;
+
+            border: 1px solid #28282d;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+        }
+
+
+        .info-label {
+
+            display: block;
+
+            color: #777;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .info-value {
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+        }
+
+
+        /* BOTONES */
+
+        .acciones {
+
+            display: flex;
+
+            gap: 15px;
+
+            align-items: center;
+
+        }
+
+
+        .btn-reproducir {
+
+            background: #e50914;
+
+            color: white;
+
+            padding: 13px 30px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.25s;
+
+        }
+
+
+        .btn-reproducir:hover {
+
+            background: #b20710;
+
+            color: white;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .btn-regresar {
+
+            color: #aaa;
+
+            border: 1px solid #38383e;
+
+            padding: 12px 25px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+
+        }
+
+
+        .btn-regresar:hover {
+
+            background: #252529;
+
+            color: white;
+
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+
+            .topbar {
+
+                padding: 20px;
+
+            }
+
+            .pelicula-container {
+
+                padding: 40px 15px;
+
+            }
+
+            .pelicula-panel {
+
+                padding: 35px 25px;
+
+            }
+
+            .pelicula-titulo {
+
+                font-size: 36px;
+
+            }
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .acciones {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+            .btn-reproducir,
+
+            .btn-regresar {
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ENCABEZADO -->
+
+<header class="topbar">
+
+    <div class="logo">
+        CINEPLUS
+    </div>
+
+    <a
+        href="/catalogo"
+        class="back-top">
+
+        Volver al catálogo
+
+    </a>
+
+</header>
+
+
+
+<!-- CONTENIDO -->
+
+<main class="pelicula-container">
+
+    <section class="pelicula-panel">
+
+
+        <div class="pelicula-label">
+
+            Película disponible
+
+        </div>
+
+
+        <h1 class="pelicula-titulo">
+
+            {{ pelicula[1] }}
+
+        </h1>
+
+
+        <div class="pelicula-genero">
+
+            Género: {{ pelicula[2] }}
+
+        </div>
+
+
+        <p class="pelicula-descripcion">
+
+            Disfruta de esta película disponible
+            en el catálogo de CinePlus.
+
+        </p>
+
+
+        <!-- INFORMACION -->
+
+        <div class="info-grid">
+
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    Título
+                </span>
+
+                <span class="info-value">
+                    {{ pelicula[1] }}
+                </span>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    Género
+                </span>
+
+                <span class="info-value">
+                    {{ pelicula[2] }}
+                </span>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    Estado
+                </span>
+
+                <span class="info-value">
+                    Disponible
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div class="acciones">
+
+
+            <a
+                href="#"
+                class="btn-reproducir">
+
+                Reproducir
+
+            </a>
+
+
+            <a
+                href="/catalogo"
+                class="btn-regresar">
+
+                Regresar al catálogo
+
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+</body>
+
+</html>
