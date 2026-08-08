@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Géneros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="page-card">
+        <div class="page-header">
+            <h2>Catálogo de Géneros</h2>
+        </div>
+
+        <div class="page-body">
+            <div class="row-crud">
+                <div class="left-panel">
+                    <div class="crud-form">
+                        <h4 class="crud-title">Nuevo Género</h4>
+
+                        <form action="/guardar_genero" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary-custom">
+                                Guardar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="crud-table">
+                        <h4 class="crud-title">Géneros registrados</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Género</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for genero in generos %}
+                                    <tr>
+                                        <td>{{ genero[0] }}</td>
+                                        <td>{{ genero[1] }}</td>
+                                        <td>
+                                            <a href="/EditarGenero/{{ genero[0] }}" class="btn btn-warning btn-sm">
+                                                Editar
+                                            </a>
+
+                                            <a href="/EliminarGenero/{{ genero[0] }}"
+                                               class="btn btn-danger btn-sm"
+                                               onclick="return confirm('¿Deseas eliminar este género?')">
+                                                Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <a href="/dashboard" class="btn btn-secondary-custom">
+                            Regresar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

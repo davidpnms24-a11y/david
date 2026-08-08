@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Género</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="page-card">
+        <div class="page-header">
+            <h2>Editar Género</h2>
+        </div>
+
+        <div class="page-body">
+            <form action="/ActualizarGenero" method="POST">
+                <input type="hidden" name="id" value="{{ genero[0] }}">
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text"
+                           name="nombre"
+                           value="{{ genero[1] }}"
+                           class="form-control"
+                           required>
+                </div>
+
+                <button type="submit" class="btn btn-primary-custom">
+                    Actualizar
+                </button>
+
+                <a href="/generos" class="btn btn-secondary-custom">
+                    Regresar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
